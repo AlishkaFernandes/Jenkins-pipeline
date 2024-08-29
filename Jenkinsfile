@@ -2,10 +2,21 @@ pipeline {
     agent any
 
     stages {
+        stage('Clean Workspace') {
+            steps {
+                script {
+                    echo 'Cleaning workspace...'
+                    bat 'if exist Jenkins-pipeline rd /s /q Jenkins-pipeline'
+                }
+            }
+        }
+
         stage('Clone Repository') {
             steps {
-                echo 'Cloning repository...'
-                bat 'git clone "https://github.com/AlishkaFernandes/Jenkins-pipeline.git"'
+                script {
+                    echo 'Cloning repository...'
+                    bat 'git clone "https://github.com/AlishkaFernandes/Jenkins-pipeline.git"'
+                }
             }
         }
 
