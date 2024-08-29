@@ -1,22 +1,23 @@
 pipeline {
     agent any
-
+    triggers {
+        githubPush()  // Trigger on GitHub push events
+    }
     stages {
-        stage("Clone the Repo") {
+        stage('Build') {
             steps {
-                bat 'git clone "https://github.com/AlishkaFernandes/Jenkins-pipeline.git"'
+                script {
+                    // Add your build steps here
+                    echo "Building the application..."
+                }
             }
         }
-
-        stage("Build a Docker Image") {
+        stage('Deploy') {
             steps {
-                bat 'docker build -t testImage ./Jenkins-pipeline'
-            }
-        }
-
-        stage("Run Docker Container") {
-            steps {
-                bat 'docker run -d testImage'
+                script {
+                    // Add your deployment steps here
+                    echo "Deploying the application..."
+                }
             }
         }
     }
